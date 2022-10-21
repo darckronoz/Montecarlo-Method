@@ -24,7 +24,7 @@ public class Jugador {
 	 /**
      * 
      * @param id Valor que prepresenta un identificador para cada jugador
-     * @param resistenciaInicial Valor que representa la resistencia con la cualinicia un jugador
+     * @param resistenciaInicial Valor que representa la resistencia con la cual inicia un jugador
      * @param experiencia Valor que representa la experiencia del jugador
      * @param suerte Valor aleatorio que representa la fortuna de cada jugador
      * @param genero Representa el sexo de cada jugador 1 para hombre y 0 para mujer
