@@ -10,20 +10,19 @@ public class Controller {
 
 	ArrayList<Player> jugadoresEquipoUno;
 	ArrayList<Player> jugadoresEquipoDos;
-	ArrayList<Game> juegos;
+	ArrayList<Game> games;
 	
 	public Controller() {
-		juegos = new ArrayList<>();
-
-		for (int i = 0; i < 2; i++) {
+		games = new ArrayList<>();
+		int matches = 1;
+		for (int i = 0; i < matches; i++) {
 			jugadoresEquipoUno = new ArrayList<>();
 			jugadoresEquipoDos = new ArrayList<>();
 			armarEquipos();
 			Game juego = new Game("J"+i,jugadoresEquipoUno,jugadoresEquipoDos);
 			juego.iniciarJuego();
-			juegos.add(juego);
+			games.add(juego);
 		}
-
 		gamersMostLucky();
 		gameresMostExperience();
 		teamWinner();
@@ -38,8 +37,8 @@ public class Controller {
 	private void teamWinner() {
 		System.out.println("-----------------------------------------------------------------------------");
 		System.out.println("\n Equipo Ganador del juego: ");
-		for (Game juego : juegos) {
-			System.out.println("\t Juego "+juego.getIdJuego()+" "+ juego.equipoGanadorRondaGrupal().getNombre()+" "+ juego.equipoGanadorRondaGrupal().getMarcadorGlobal());
+		for (Game game : games) {
+			System.out.println("\t Juego "+game.getIdJuego()+" "+ game.equipoGanadorRondaGrupal().getNombre()+" "+ game.equipoGanadorRondaGrupal().getMarcadorGlobal());
 		}
 		System.out.println("----------------------------------------------------------------------------");
 	}
@@ -50,7 +49,7 @@ public class Controller {
 	private void gamersMostLucky() {
 		System.out.println("\n Jugadores con mas suerte en cada juego : ");
 		System.out.println("----------------------------------------------------------------------------");
-		for (Game juego : juegos) {
+		for (Game juego : games) {
 			System.out.println("\t Juego"+juego.getIdJuego()+" "+ juego.jugadorConMasSuerte());
 			System.out.println("----------------------------------------------------------------------------");
 		}
@@ -62,7 +61,7 @@ public class Controller {
 	private void gameresMostExperience() {
 		System.out.println("\n Jugadores con mas experiencia por juego: ");
 		System.out.println("***********************************************************************");
-		for (Game juego : juegos) {
+		for (Game juego : games) {
 			System.out.println("\t Juego"+juego.getIdJuego()+" "+ juego.jugadorConMasExperiencia());
 			System.out.println("***********************************************************************");
 		}
@@ -76,7 +75,7 @@ public class Controller {
 		System.out.println("\n Genero Ganador Total Juegos: ");
 		int femenino=0;
 		int masculino=0;
-		for (Game juego : juegos) {
+		for (Game juego : games) {
 			int genero=	juego.jugadorGanador().getGenero();
 			if (genero==0) {
 				femenino++;
@@ -92,7 +91,7 @@ public class Controller {
 */
 	private void genderWinnerGame() {
 		System.out.println("\n Genero ganador por Juego: ");
-		for (Game juego : juegos) {
+		for (Game juego : games) {
 			System.out.println("\t "+juego.generoGanadorJuego());
 		}
 	}
@@ -149,7 +148,7 @@ public class Controller {
 
 	private ArrayList<Integer> getScoreSetTeamOne(String id) {
 		ArrayList<Integer> puntajes = new ArrayList<>();
-		for (Game juego : juegos) {
+		for (Game juego : games) {
 			if (juego.getEquipoUno().buscarJugador(id)!=null) {
 				for (Integer integer : juego.getEquipoUno().buscarJugador(id).getPuntajesRondas()) {
 					puntajes.add(integer);
@@ -165,7 +164,7 @@ public class Controller {
 */
 	private ArrayList<Integer> getScoreSetTeamTwo(String id) {
 		ArrayList<Integer> puntajes = new ArrayList<>();
-		for (Game juego : juegos) {
+		for (Game juego : games) {
 			if (juego.getEquipoDos().buscarJugador(id)!=null) {
 				for (Integer integer : juego.getEquipoDos().buscarJugador(id).getPuntajesRondas()) {
 					puntajes.add(integer);

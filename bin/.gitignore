@@ -1,1 +1,4 @@
 /run/
+/models/
+/controller/
+/views/

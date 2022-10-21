@@ -7,10 +7,10 @@ public class Board {
 	int[] rangoMujeres;
 	int[] rangoHombres;
 
-	ArrayList<String[]> tablero;
+	ArrayList<String[]> board;
 
 	public Board() {
-		tablero = new ArrayList<>();
+		board = new ArrayList<>();
 		rangoMujeres = new int[4];
 		rangoHombres = new int[4];
 		addDianas();
@@ -23,19 +23,19 @@ public class Board {
 		String[] central={"Central","30","20","10"};
 		rangoMujeres[0]=Integer.parseInt(central[1]);
 		rangoHombres[0]=Integer.parseInt(central[2]);
-		tablero.add(central);
+		board.add(central);
 		String[] intermedia={"Intermedia","38","33","9"};
 		rangoMujeres[1]=Integer.parseInt(intermedia[1])+rangoMujeres[0];
 		rangoHombres[1]=Integer.parseInt(intermedia[2])+rangoHombres[0];
-		tablero.add(intermedia);
+		board.add(intermedia);
 		String[] exterior={"Exterior","27","40","8"};
 		rangoMujeres[2]=Integer.parseInt(exterior[1])+rangoMujeres[1];
 		rangoHombres[2]=Integer.parseInt(exterior[2])+rangoHombres[1];
-		tablero.add(exterior);
+		board.add(exterior);
 		String[] error={"Error","5","7","0"};
 		rangoMujeres[3]=Integer.parseInt(error[1])+rangoMujeres[2];
 		rangoHombres[3]=Integer.parseInt(error[2])+rangoHombres[2];
-		tablero.add(error);
+		board.add(error);
 	}
 
 	 /**

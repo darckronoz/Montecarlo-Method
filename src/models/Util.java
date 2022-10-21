@@ -10,14 +10,14 @@ public class Util {
 */
 	public static double pseudoaleatorios(int minimo, int maximo) {
 		int seed = 1357;
-		int cantidadDatosAGenerar = 1;
+		int dataAmount = 1;
 		int k = (int) (Math.random()*10)+1;
 		int g = (int) (Math.random()*10)+1;
 		int c = (int) (Math.random()*10)+1;
-		LinealCongruencial congruenciaLineal = new LinealCongruencial(seed, k, g, c, cantidadDatosAGenerar);
-        congruenciaLineal.llenarXi();
-        congruenciaLineal.llenarRi();
-        congruenciaLineal.fillNiUniforme(minimo, maximo);
+		LinealCongruencial congruenciaLineal = new LinealCongruencial(seed, k, g, c, dataAmount);
+        congruenciaLineal.fillXi();
+        congruenciaLineal.fillRi();
+        congruenciaLineal.fillUniformNi(minimo, maximo);
         return congruenciaLineal.getNiUniforme().get(0);
 	}
 }
