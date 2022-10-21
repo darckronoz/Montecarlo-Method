@@ -2,14 +2,14 @@ package models;
 
 import java.util.ArrayList;
 
-public class Tablero {
+public class Board {
 
 	int[] rangoMujeres;
 	int[] rangoHombres;
 
 	ArrayList<String[]> tablero;
 
-	public Tablero() {
+	public Board() {
 		tablero = new ArrayList<>();
 		rangoMujeres = new int[4];
 		rangoHombres = new int[4];

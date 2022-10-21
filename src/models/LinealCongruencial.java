@@ -3,7 +3,7 @@ package models;
 
 import java.util.ArrayList;
 
-public class CongruenciaLineal {
+public class LinealCongruencial {
 
     private int semilla;
     private int a;
@@ -23,7 +23,7 @@ public class CongruenciaLineal {
      * @param numerosAGenerar Cantidad de Numeros a Generar
      */
 
-    public CongruenciaLineal(int semilla, int k, int g, int c, int numerosAGenerar){
+    public LinealCongruencial(int semilla, int k, int g, int c, int numerosAGenerar){
         this.a = 2*k + 1;
         this.m = (int) Math.pow(2, g);
         this.c = c;

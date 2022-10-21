@@ -1,16 +1,16 @@
 package controller;
 
 import java.util.ArrayList;
-import models.Juego;
-import models.Jugador;
+import models.Game;
+import models.Player;
 import models.Util;
 import views.ScatterPlotDemo;
 
 public class Controller {
 
-	ArrayList<Jugador> jugadoresEquipoUno;
-	ArrayList<Jugador> jugadoresEquipoDos;
-	ArrayList<Juego> juegos;
+	ArrayList<Player> jugadoresEquipoUno;
+	ArrayList<Player> jugadoresEquipoDos;
+	ArrayList<Game> juegos;
 	
 	public Controller() {
 		juegos = new ArrayList<>();
@@ -19,50 +19,50 @@ public class Controller {
 			jugadoresEquipoUno = new ArrayList<>();
 			jugadoresEquipoDos = new ArrayList<>();
 			armarEquipos();
-			Juego juego = new Juego("J"+i,jugadoresEquipoUno,jugadoresEquipoDos);
+			Game juego = new Game("J"+i,jugadoresEquipoUno,jugadoresEquipoDos);
 			juego.iniciarJuego();
 			juegos.add(juego);
 		}
 
-		jugadoresMasSuertudos();
-		jugadoresMasExperimentado();
-		equipoGandor();
-		generoGanadorPorJuego();
-		generoGanadorTotal();
-		generarGrafica();
+		gamersMostLucky();
+		gameresMostExperience();
+		teamWinner();
+		genderWinnerGame();
+		genderWinnerTotal();
+		generatePlot();
 	}
 
 	 /**
-	  * este metodo muestra por consola el equipo ganador por juego
+	  * este metodo muestra por consola el equipo ganador por cada juego
 */
-	private void equipoGandor() {
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		System.out.println("\n Equipo ganador por juego: ");
-		for (Juego juego : juegos) {
+	private void teamWinner() {
+		System.out.println("-----------------------------------------------------------------------------");
+		System.out.println("\n Equipo Ganador del juego: ");
+		for (Game juego : juegos) {
 			System.out.println("\t Juego "+juego.getIdJuego()+" "+ juego.equipoGanadorRondaGrupal().getNombre()+" "+ juego.equipoGanadorRondaGrupal().getMarcadorGlobal());
 		}
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("----------------------------------------------------------------------------");
 	}
 	
 	 /**
-	  * este metodo muestra por consola los jugadores con mas suerte por juego
+	  * Metodo que muestra los jugadores mas suertudos
 */
-	private void jugadoresMasSuertudos() {
-		System.out.println("\n Jugadores con mas suerte por juego: ");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		for (Juego juego : juegos) {
+	private void gamersMostLucky() {
+		System.out.println("\n Jugadores con mas suerte en cada juego : ");
+		System.out.println("----------------------------------------------------------------------------");
+		for (Game juego : juegos) {
 			System.out.println("\t Juego"+juego.getIdJuego()+" "+ juego.jugadorConMasSuerte());
-			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("----------------------------------------------------------------------------");
 		}
 	}
 
 	 /**
 	  * este metodo muestra por consola los jugadores con mas experiencia por juego
 */
-	private void jugadoresMasExperimentado() {
+	private void gameresMostExperience() {
 		System.out.println("\n Jugadores con mas experiencia por juego: ");
 		System.out.println("***********************************************************************");
-		for (Juego juego : juegos) {
+		for (Game juego : juegos) {
 			System.out.println("\t Juego"+juego.getIdJuego()+" "+ juego.jugadorConMasExperiencia());
 			System.out.println("***********************************************************************");
 		}
@@ -72,11 +72,11 @@ public class Controller {
 	  * este metodo muestra por consola el genero ganador por to total de juegos
 	  * @return el genero ganador
 */
-	private String generoGanadorTotal() {
+	private String genderWinnerTotal() {
 		System.out.println("\n Genero Ganador Total Juegos: ");
 		int femenino=0;
 		int masculino=0;
-		for (Juego juego : juegos) {
+		for (Game juego : juegos) {
 			int genero=	juego.jugadorGanador().getGenero();
 			if (genero==0) {
 				femenino++;
@@ -90,21 +90,21 @@ public class Controller {
 	 /**
 	  * este metodo muestra por consola el genero ganador por juego
 */
-	private void generoGanadorPorJuego() {
+	private void genderWinnerGame() {
 		System.out.println("\n Genero ganador por Juego: ");
-		for (Juego juego : juegos) {
+		for (Game juego : juegos) {
 			System.out.println("\t "+juego.generoGanadorJuego());
 		}
 	}
 
 
 	 /**
-	  * @param femenino cantidad de juegos ganados por el genero femenino
-	  * @param masculino cantidad de juegos ganados por el genero masculino
+	  * @param fem cantidad de juegos ganados por el genero femenino
+	  * @param mas cantidad de juegos ganados por el genero masculino
 	  * @return el genero ganador
 */
-	private String generoG(int femenino, int masculino) {
-		if (femenino>masculino) {
+	private String generoG(int fem, int mas) {
+		if (fem>mas) {
 			System.out.println("\t FEMENINO");
 			return "FEMENINO";
 		}else {
@@ -120,36 +120,36 @@ public class Controller {
 		jugadoresEquipoUno.clear();
 		jugadoresEquipoDos.clear();
 		for (int i = 0; i < 6; i++) {
-			jugadoresEquipoUno.add(new Jugador("A"+i,(int) Util.pseudoaleatorios(30,50), 10, (int) Util.pseudoaleatorios(1,4), (int) (Math.random()*2)));
-			jugadoresEquipoDos.add(new Jugador("R"+i,(int) Util.pseudoaleatorios(30,50), 10,(int) Util.pseudoaleatorios(1,4), (int) (Math.random()*2)));
+			jugadoresEquipoUno.add(new Player("A"+i,(int) Util.pseudoaleatorios(30,50), 10, (int) Util.pseudoaleatorios(1,4), (int) (Math.random()*2)));
+			jugadoresEquipoDos.add(new Player("R"+i,(int) Util.pseudoaleatorios(30,50), 10,(int) Util.pseudoaleatorios(1,4), (int) (Math.random()*2)));
 		}
 	}
 
 	 /**
-	  * metodo que se encarg de generar la grafica con los datos guardados en cada uno de los equipos
+	  * metodo que se encarga de generar la grafica con los datos guardados en cada uno de los equipos
 */
-	private void generarGrafica() {
-		ArrayList<Jugador> totalJugadores = new ArrayList<>();
+	private void generatePlot() {
+		ArrayList<Player> totalJugadores = new ArrayList<>();
 		totalJugadores.addAll(jugadoresEquipoUno);
 		totalJugadores.addAll(jugadoresEquipoDos);
 		ScatterPlotDemo g = new ScatterPlotDemo(totalJugadores);
-		for (Jugador jugador : jugadoresEquipoUno) {
-			g.addInforJuegos(jugador.getId(), getPuntajeRondasEquipoUno(jugador.getId()));
+		for (Player jugador : jugadoresEquipoUno) {
+			g.addInfoGame(jugador.getId(), getScoreSetTeamOne(jugador.getId()));
 		}
-		for (Jugador jugador : jugadoresEquipoDos) {
-			g.addInforJuegos(jugador.getId(), getPuntajeRondasEquipoDos(jugador.getId()));
+		for (Player jugador : jugadoresEquipoDos) {
+			g.addInfoGame(jugador.getId(), getScoreSetTeamTwo(jugador.getId()));
 		}
-		g.iniciarGrafica();
+		g.initGraphics();
 	}
 	
-	 /**
-	  * @param id identificador de un jugador
-	  * @return lista de todos los puntajes realizados por un jugador en todas las rondas jugadas esto del quipo uno 
+	/**
+	  * @param id del jugador
+	  * @return lista puntajes realizados por un jugador en todas las rondas jugadas del equipo 1
 */
 
-	private ArrayList<Integer> getPuntajeRondasEquipoUno(String id) {
+	private ArrayList<Integer> getScoreSetTeamOne(String id) {
 		ArrayList<Integer> puntajes = new ArrayList<>();
-		for (Juego juego : juegos) {
+		for (Game juego : juegos) {
 			if (juego.getEquipoUno().buscarJugador(id)!=null) {
 				for (Integer integer : juego.getEquipoUno().buscarJugador(id).getPuntajesRondas()) {
 					puntajes.add(integer);
@@ -160,12 +160,12 @@ public class Controller {
 		return puntajes;
 	}
 	 /**
-	  * @param id identificador de un jugador
-	  * @return lista de todos los puntajes realizados por un jugador en todas las rondas jugadas esto del quipo dos
+	  * @param id del jugador
+	  * @return lista puntajes realizados por un jugador en todas las rondas jugadas del equipo 2
 */
-	private ArrayList<Integer> getPuntajeRondasEquipoDos(String id) {
+	private ArrayList<Integer> getScoreSetTeamTwo(String id) {
 		ArrayList<Integer> puntajes = new ArrayList<>();
-		for (Juego juego : juegos) {
+		for (Game juego : juegos) {
 			if (juego.getEquipoDos().buscarJugador(id)!=null) {
 				for (Integer integer : juego.getEquipoDos().buscarJugador(id).getPuntajesRondas()) {
 					puntajes.add(integer);
@@ -176,11 +176,6 @@ public class Controller {
 		return puntajes;
 	}
 
-	 /**
-	  * metodo para inicializar la aplicación 
-	  * @param args datos necesarios para inicializar la aplicacion (no requeridos)
-*/
-	public static void main(String[] args) {
-		new Controller();
-	}
+
+	
 }
