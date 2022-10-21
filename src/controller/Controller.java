@@ -15,7 +15,7 @@ public class Controller {
 	public Controller() {
 		juegos = new ArrayList<>();
 
-		for (int i = 0; i < 500; i++) {
+		for (int i = 0; i < 2; i++) {
 			jugadoresEquipoUno = new ArrayList<>();
 			jugadoresEquipoDos = new ArrayList<>();
 			armarEquipos();
