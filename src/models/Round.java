@@ -1,12 +1,12 @@
 package models;
 
-public class Ronda {
+public class Round {
 
 	private int idRonda;
-	private Equipo equipoUno;
-	private Equipo equipoDos;
-	private Jugador jugadorEquipoUno;
-	private Jugador jugadorEquipoDos;
+	private Team equipoUno;
+	private Team equipoDos;
+	private Player jugadorEquipoUno;
+	private Player jugadorEquipoDos;
 
 	 /**
 	  * @param idRonda identificador de la ronda
@@ -14,7 +14,7 @@ public class Ronda {
 	  * @param equipoDos equipo numero dos 
 */
 
-	public Ronda(int idRonda, Equipo equipoUno,Equipo equipoDos) {
+	public Round(int idRonda, Team equipoUno,Team equipoDos) {
 		this.idRonda=idRonda;
 		this.equipoUno=equipoUno;
 		this.equipoDos=equipoDos;
@@ -25,7 +25,7 @@ public class Ronda {
 	  * metodo que se encarga de validar si un jugador del equipo Uno ingresado por parametro a realizado  tiros consecutivos 
 	  * @param jugadorEquipoUno representa el jugador del equipo uno
 */
-	public void validarTirosConsecutivosEquipoUno(Jugador jugadorEquipoUno) {
+	public void validarTirosConsecutivosEquipoUno(Player jugadorEquipoUno) {
 		if (this.jugadorEquipoUno!=null&&this.jugadorEquipoUno.getId()==jugadorEquipoUno.getId()) {
 			this.jugadorEquipoUno.setTirosExtra(this.jugadorEquipoUno.getTirosExtra()+1);
 			if (this.jugadorEquipoUno.getTirosExtra()==3) {
@@ -40,7 +40,7 @@ public class Ronda {
 	  * metodo que se encarga de validar si un jugador del equipo dos ingresado por parametro a realizado  tiros consecutivos 
 	  * @param jugadorEquipoDos representa el jugador del equipo dos
 */
-	public void validarTirosConsecutivosEquipoDos(Jugador jugadorEquipoDos) {
+	public void validarTirosConsecutivosEquipoDos(Player jugadorEquipoDos) {
 		if (this.jugadorEquipoDos!=null&&this.jugadorEquipoDos.getId()==jugadorEquipoDos.getId()) {
 			this.jugadorEquipoDos.setTirosExtra(this.jugadorEquipoDos.getTirosExtra()+1);
 			if (this.jugadorEquipoDos.getTirosExtra()==3) {
@@ -54,8 +54,8 @@ public class Ronda {
 	 /**
 	  * @return  el jugador con mayor puntaje de los dos equipos
 */
-	public Jugador ganadorRonda() {
-		Jugador jugador = null;
+	public Player ganadorRonda() {
+		Player jugador = null;
 		if (equipoUno.ganadorIndividual().getPuntaje()>equipoDos.ganadorIndividual().getPuntaje()) {
 			jugador= equipoUno.ganadorIndividual();
 		}else {
@@ -68,8 +68,8 @@ public class Ronda {
 	 /**
 	  * @return  el equipo con mayor puntaje global de los dos equipos
 */
-	public Equipo ganadorRondaGrupal() {
-		Equipo equipo = null;
+	public Team ganadorRondaGrupal() {
+		Team equipo = null;
 		if (equipoUno.getMarcadorGlobal()>equipoDos.getMarcadorGlobal()) {
 			equipo= equipoUno;
 		}else {

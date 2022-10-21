@@ -2,12 +2,12 @@ package models;
 
 import java.util.ArrayList;
 
-public class Juego {
+public class Game {
 
 	private String idJuego;
-	private ArrayList<Ronda> rondas;
-	private Equipo equipoUno;
-	private Equipo equipoDos;
+	private ArrayList<Round> rondas;
+	private Team equipoUno;
+	private Team equipoDos;
 	int equipoAlanzar;
 
 	/**
@@ -15,11 +15,11 @@ public class Juego {
 	 * @param jugadoresEquipoUno lista la cual contiene los jugadores que hacen parte del equipo uno
 	 * @param jugadoresEquipoDos lista la cual contiene los jugadores que hacen parte del equipo dos
 	 */
-	public Juego(String idJuego,ArrayList<Jugador> jugadoresEquipoUno,ArrayList<Jugador> jugadoresEquipoDos) {
+	public Game(String idJuego,ArrayList<Player> jugadoresEquipoUno,ArrayList<Player> jugadoresEquipoDos) {
 		this.idJuego=idJuego;
 		rondas = new ArrayList<>();
-		equipoUno = new Equipo("Azul",jugadoresEquipoUno);
-		equipoDos = new Equipo("Rojo",jugadoresEquipoDos);
+		equipoUno = new Team("Azul",jugadoresEquipoUno);
+		equipoDos = new Team("Rojo",jugadoresEquipoDos);
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class Juego {
 	 * @param numeroRonda cantidad de rondas a jugar
 	 */
 	private void iniciarRonda(int numeroRonda) {
-		Ronda ronda = new Ronda(numeroRonda, equipoUno, equipoDos);
+		Round ronda = new Round(numeroRonda, equipoUno, equipoDos);
 		while (equipoUno.jugadoresDiponibles()>0&&equipoDos.jugadoresDiponibles()>0) {
 			lanzarATablero();
 		}		
@@ -69,7 +69,7 @@ public class Juego {
 	 * @return el equipo ganador por una ronda individual
 	 */
 
-	public Equipo equipoGanadorRondaIndivudual() {
+	public Team equipoGanadorRondaIndivudual() {
 		if (equipoUno.ganadorIndividual().getPuntaje()> equipoDos.ganadorIndividual().getPuntaje()) {
 			return equipoUno;
 		}else if(equipoUno.ganadorIndividual().getPuntaje()< equipoDos.ganadorIndividual().getPuntaje()) {
@@ -83,8 +83,8 @@ public class Juego {
 	/**
 	 * @return el equipo ganador por su puntaje global
 	 */
-	public Equipo equipoGanadorRondaGrupal() {
-		Equipo equipoGanador = null;
+	public Team equipoGanadorRondaGrupal() {
+		Team equipoGanador = null;
 		if (equipoUno.getMarcadorGlobal()> equipoDos.getMarcadorGlobal()) {
 			equipoGanador = equipoUno;
 		}else {
@@ -104,7 +104,7 @@ public class Juego {
 	/**
 	 * @return el jugador con mas suerte de los dos equipos
 	 */
-	public Jugador jugadorConMasSuerte() {
+	public Player jugadorConMasSuerte() {
 		if ( jugadorConMasSuerteEquipoUno().getSumatoriaSuerte()>jugadorConMasSuerteEquipoDos().getSumatoriaSuerte()) {
 			return  jugadorConMasSuerteEquipoUno();
 		}
@@ -116,10 +116,10 @@ public class Juego {
 	/**
 	 * @return el jugador con mas suerte del quipo uno
 	 */
-	private Jugador jugadorConMasSuerteEquipoUno() {
-		Jugador ganadorMasSuertudo =null;
+	private Player jugadorConMasSuerteEquipoUno() {
+		Player ganadorMasSuertudo =null;
 		int maxSuerte =0;
-		for (Jugador jugador : equipoUno.getJugadores()) {
+		for (Player jugador : equipoUno.getJugadores()) {
 			if (jugador.getSumatoriaSuerte()>maxSuerte) {
 				ganadorMasSuertudo=jugador;
 				maxSuerte=jugador.getSumatoriaSuerte();
@@ -131,10 +131,10 @@ public class Juego {
 	/**
 	 * @return el jugador con mas suerte del quipo dos
 	 */
-	private Jugador jugadorConMasSuerteEquipoDos() {
-		Jugador ganadorMasSuertudo =null;
+	private Player jugadorConMasSuerteEquipoDos() {
+		Player ganadorMasSuertudo =null;
 		int maxSuerte =0;
-		for (Jugador jugador : equipoDos.getJugadores()) {
+		for (Player jugador : equipoDos.getJugadores()) {
 			if (jugador.getSumatoriaSuerte()>maxSuerte) {
 				ganadorMasSuertudo=jugador;
 				maxSuerte=jugador.getSumatoriaSuerte();
@@ -147,10 +147,10 @@ public class Juego {
 	/**
 	 * @return el jugador con mas experiencia del quipo uno
 	 */
-	private Jugador jugadorConMasExperienciaEquipoUno() {
-		Jugador ganadorMasExperimentado =null;
+	private Player jugadorConMasExperienciaEquipoUno() {
+		Player ganadorMasExperimentado =null;
 		int maxExperiencia =0;
-		for (Jugador jugador : equipoUno.getJugadores()) {
+		for (Player jugador : equipoUno.getJugadores()) {
 			if (jugador.getExperiencia()>maxExperiencia) {
 				ganadorMasExperimentado=jugador;
 				maxExperiencia=jugador.getExperiencia();
@@ -162,10 +162,10 @@ public class Juego {
 	/**
 	 * @return el jugador con mas experiencia del quipo uno
 	 */
-	private Jugador jugadorConMasExperienciaEquipoDos() {
-		Jugador ganadorMasExperimentado =null;
+	private Player jugadorConMasExperienciaEquipoDos() {
+		Player ganadorMasExperimentado =null;
 		int maxExperiencia =0;
-		for (Jugador jugador : equipoDos.getJugadores()) {
+		for (Player jugador : equipoDos.getJugadores()) {
 			if (jugador.getExperiencia()>maxExperiencia) {
 				ganadorMasExperimentado=jugador;
 				maxExperiencia=jugador.getExperiencia();
@@ -181,7 +181,7 @@ public class Juego {
 	public String generoGanadorJuego() {
 		int femenino=0;
 		int masculino=0;
-		for (Ronda ronda : rondas) {
+		for (Round ronda : rondas) {
 			int genero=	ronda.ganadorRonda().getGenero();
 			if (genero==0) {
 				femenino++;
@@ -208,7 +208,7 @@ public class Juego {
 	/**
 	 * @return el jugador con mas experiencia de los dos equipos
 	 */
-	public Jugador jugadorConMasExperiencia() {
+	public Player jugadorConMasExperiencia() {
 		if ( jugadorConMasExperienciaEquipoUno().getExperiencia()>jugadorConMasExperienciaEquipoDos().getExperiencia()) {
 			return  jugadorConMasExperienciaEquipoUno();
 		}
@@ -220,7 +220,7 @@ public class Juego {
 	/**
 	 * @return el jugador ganador de los dos equipos por su puntaje 
 	 */
-	public Jugador jugadorGanador() {
+	public Player jugadorGanador() {
 		if (equipoUno.ganadorEquipo().getPuntaje()>equipoDos.ganadorEquipo().getPuntaje()) {
 			return  equipoUno.getJugadorGanador();
 		}
@@ -232,21 +232,21 @@ public class Juego {
 	 /**
 	  * @return el equipo uno
 */
-	public Equipo getEquipoUno() {
+	public Team getEquipoUno() {
 		return equipoUno;
 	}
 
 	 /**
 	  * @return el equipo dos
 */
-	public Equipo getEquipoDos() {
+	public Team getEquipoDos() {
 		return equipoDos;
 	}
 
 	 /**
 	  * @return cantidad de rondas jugadas 
 */
-	public ArrayList<Ronda> getRondas() {
+	public ArrayList<Round> getRondas() {
 		return rondas;
 	}
 

@@ -8,7 +8,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import models.Jugador;
+import models.Player;
 
 
 public class ScatterPlotDemo extends JFrame{
@@ -21,7 +21,7 @@ public class ScatterPlotDemo extends JFrame{
 	 /**
 	  *@param rondas lista que contiene todas las rondas que se van a graficar 
 */
-	public ScatterPlotDemo(ArrayList<Jugador> rondas) {
+	public ScatterPlotDemo(ArrayList<Player> rondas) {
 		super("Gráfica de jugadores vs juego");
 		setExtendedState(MAXIMIZED_BOTH);
 		setLayout(new BorderLayout());
@@ -39,16 +39,16 @@ public class ScatterPlotDemo extends JFrame{
 	  * este metodo carga las series por cada jugador 
 	  *@param jugadoresEquipoUno lista que contiene todas los jugadores que participaron en los juegos 
 */
-	public void crearGrafico(ArrayList<Jugador> jugadoresEquipoUno) { 
+	public void crearGrafico(ArrayList<Player> jugadoresEquipoUno) { 
 		dataset = new XYSeriesCollection();
-		for (Jugador jugador : jugadoresEquipoUno) {
+		for (Player jugador : jugadoresEquipoUno) {
 			XYSeries  seriesPA = new XYSeries(jugador.getId());//"Producto A" es la etiqueta o nombre
 			dataset.addSeries(seriesPA);//anadir la serie del producto A
 		}
 		chart = ChartFactory.createScatterPlot(
-				"Gráfica de puntaje de los jugadores", // Titulo
-				"Rondas Jugadas", // Etiqueta Coordenada X
-				"Puntaje", // Etiqueta Coordenada Y
+				"PUNTAJES JUGADORES", // Titulo
+				"RONDAS", // Etiqueta Coordenada X
+				"PUNTUACIÓN", // Etiqueta Coordenada Y
 				dataset, // Datos
 				PlotOrientation.VERTICAL,
 				true, // Muestra la leyenda de los productos en el eje de la X
@@ -62,7 +62,7 @@ public class ScatterPlotDemo extends JFrame{
 	  *@param nombre representa el nombre de cada serie (jugador)
 	  *@param puntajeJuegos lista que contiene cada uno de los puntajes obtenidos por el jugador (serie) 
 */
-	public void addInforJuegos(String nombre,ArrayList<Integer> puntajeJuegos) {
+	public void addInfoGame(String nombre,ArrayList<Integer> puntajeJuegos) {
 		for (int i = 0; i < puntajeJuegos.size(); i++) {
 			dataset.getSeries(nombre).add(i,puntajeJuegos.get(i));
 		}
@@ -70,7 +70,7 @@ public class ScatterPlotDemo extends JFrame{
 	 /**
 	  * este metodo re valida , re pinta y muestra la grafica con todos los datos ingresados
 */
-	public void iniciarGrafica() {
+	public void initGraphics() {
 		revalidate();
 		repaint();
 		setVisible(true);

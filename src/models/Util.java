@@ -14,7 +14,7 @@ public class Util {
 		int k = (int) (Math.random()*10)+1;
 		int g = (int) (Math.random()*10)+1;
 		int c = (int) (Math.random()*10)+1;
-		CongruenciaLineal congruenciaLineal = new CongruenciaLineal(seed, k, g, c, cantidadDatosAGenerar);
+		LinealCongruencial congruenciaLineal = new LinealCongruencial(seed, k, g, c, cantidadDatosAGenerar);
         congruenciaLineal.llenarXi();
         congruenciaLineal.llenarRi();
         congruenciaLineal.fillNiUniforme(minimo, maximo);

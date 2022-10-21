@@ -2,22 +2,22 @@ package models;
 
 import java.util.ArrayList;
 
-public class Jugador {
+public class Player {
 
 	private String id;
-	private int resistenciaRondaAnterior;
-	private int resistenciaActual;
 	private int experiencia;
 	private int suerte;
-	private int genero;
+	private int resistenciaRondaAnterior;
+	private int resistenciaActual;
 	private int cantidadLanzamiento;
-	private int tirosExtra;
-	private int puntaje;
 	private int lanzamientosSinResistencia;
-	private boolean tienePuntosDeExperiencia;
+	private int tirosExtra;
+	private int genero;
 	private int sumatoriaSuerte;
+	private int puntaje;
+	private boolean tienePuntosDeExperiencia;
 
-	private ArrayList<Lanzamiento> lanzamientos;
+	private ArrayList<Launch> lanzamientos;
 	private ArrayList<Integer> puntajesRondas;
 
 
@@ -29,7 +29,7 @@ public class Jugador {
      * @param suerte Valor aleatorio que representa la fortuna de cada jugador
      * @param genero Representa el sexo de cada jugador 1 para hombre y 0 para mujer
      */
-	public Jugador(String id, int resistenciaInicial, int experiencia, int suerte, int genero) {
+	public Player(String id, int resistenciaInicial, int experiencia, int suerte, int genero) {
 		this.id = id;
 		this.resistenciaRondaAnterior=resistenciaInicial;
 		this.resistenciaActual=resistenciaInicial;
@@ -50,7 +50,7 @@ public class Jugador {
      * 
      * @param lanzamiento Variable que prepresenta un lanzamiento realizado por el jugador
      */
-	public void addLanzamiento(Lanzamiento lanzamiento) {
+	public void addLanzamiento(Launch lanzamiento) {
 		lanzamientos.add(lanzamiento);
 	}
 
@@ -62,7 +62,7 @@ public class Jugador {
 	public int  lanzar() {
 		int puntajeLanzamiento=0;
 		if (resistenciaActual>=5) {
-			Lanzamiento l = new Lanzamiento();
+			Launch l = new Launch();
 			puntajeLanzamiento= l.puntajeLanzamiento(genero);
 			lanzamientos.add(l);
 			cantidadLanzamiento++;
@@ -80,7 +80,7 @@ public class Jugador {
      */
 	public int lanzarExtra() {
 		int puntajeExtra = 0;
-		Lanzamiento l = new Lanzamiento();
+		Launch l = new Launch();
 		puntajeExtra+= l.puntajeLanzamiento(genero);
 		tirosExtra++;
 		return puntajeExtra;

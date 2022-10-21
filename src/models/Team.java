@@ -2,20 +2,20 @@ package models;
 
 import java.util.ArrayList;
 
-public class Equipo {
+public class Team {
 
 	private String nombre;
 	private int jugadorALanzar;
 	private int marcadorGlobal;
-	private ArrayList<Jugador> jugadores;
-	private Jugador jugadorGanador;
+	private ArrayList<Player> jugadores;
+	private Player jugadorGanador;
 	
 	 /**
      * @param nombre representa el identificador para cada equipo
      * @param jugadores lista la cual contiene los jugadores que hacen parte del equipo
      */
 
-	public Equipo(String nombre,ArrayList<Jugador> jugadores) {
+	public Team(String nombre,ArrayList<Player> jugadores) {
 		jugadorALanzar=0;
 		this.nombre = nombre;
 		this.jugadores = jugadores;
@@ -26,7 +26,7 @@ public class Equipo {
      * @return retorna la sumatoria de los puntajes de todos los jugadores
      */
 	public int getMarcadorGlobal() {
-		for (Jugador jugador : jugadores) {
+		for (Player jugador : jugadores) {
 			marcadorGlobal+=jugador.getPuntaje();
 		}
 		return marcadorGlobal;
@@ -35,10 +35,10 @@ public class Equipo {
 	/**
      * @return retorna el jugador ganador por su puntaje
      */
-	public Jugador ganadorIndividual() {
-		Jugador ganadorIndividual=null;
+	public Player ganadorIndividual() {
+		Player ganadorIndividual=null;
 		int data=0;
-		for (Jugador jugador : jugadores) {
+		for (Player jugador : jugadores) {
 			if (jugador.getPuntaje()>data) {
 				data= jugador.getPuntaje();
 				ganadorIndividual=jugador;
@@ -51,7 +51,7 @@ public class Equipo {
      * busca el jugador a lanzar y le permite lanzar mientras tiene resistencia 
      */
 	public void ALanzar() {
-		Jugador jugador= jugadores.get(getJugadorALanzar());
+		Player jugador= jugadores.get(getJugadorALanzar());
 		while(jugador.getResistencia()>=5) {
 			marcadorGlobal +=jugador.lanzar();
 		}
@@ -73,7 +73,7 @@ public class Equipo {
      */
 	public int jugadoresDiponibles() {
 		int energia =0;
-		for (Jugador jugador : jugadores) {			
+		for (Player jugador : jugadores) {			
 			if (jugador.getResistencia()>=5) {
 				energia++;
 			}
@@ -85,9 +85,9 @@ public class Equipo {
 	 * @param id identificador de un jugador
      * @return jugador que coincide con el id suministrado
      */
-	public Jugador buscarJugador(String id) {
-		Jugador jugador=null;
-		for (Jugador jugadorN : jugadores) {
+	public Player buscarJugador(String id) {
+		Player jugador=null;
+		for (Player jugadorN : jugadores) {
 			if (jugadorN.getId().equals(id)) {
 				 jugador=jugadorN;
 			}
@@ -98,10 +98,10 @@ public class Equipo {
 	/**
      * @return jugador con mas suerte al cual se le concede el tiro extra
      */
-	public Jugador sorteTiroExtra() {
+	public Player sorteTiroExtra() {
 		int mayorSuerte= 0;
-		Jugador jugadorMasSuerte= null;
-		for (Jugador jugador : jugadores) {
+		Player jugadorMasSuerte= null;
+		for (Player jugador : jugadores) {
 			if (jugador.getSuerte()>mayorSuerte) {
 				mayorSuerte=jugador.getSuerte();
 				jugadorMasSuerte= jugador;
@@ -115,10 +115,10 @@ public class Equipo {
 	/**
      * @return jugador que posee mas puntos 
      */
-	public Jugador ganadorEquipo() {
+	public Player ganadorEquipo() {
 		int mayorpuntaje= 0;
-		Jugador jugadorMaspuntaje= null;
-		for (Jugador jugador : jugadores) {
+		Player jugadorMaspuntaje= null;
+		for (Player jugador : jugadores) {
 			if (jugador.getSuerte()>mayorpuntaje) {
 				mayorpuntaje=jugador.getPuntaje();
 				jugadorMaspuntaje= jugador;
@@ -133,7 +133,7 @@ public class Equipo {
      */
 
 	public void siguienteRonda() {
-		for (Jugador jugador : jugadores) {
+		for (Player jugador : jugadores) {
 			jugador.finDeRonda();
 		}
 	}
@@ -155,14 +155,14 @@ public class Equipo {
 	/**
      * @return lista con todos los jugadores que conforman el equipo
      */
-	public ArrayList<Jugador> getJugadores() {
+	public ArrayList<Player> getJugadores() {
 		return jugadores;
 	}
 	
 	/**
      * @return Jugador el cual posee mas puntaje de todo el equipo
      */
-	public Jugador getJugadorGanador() {
+	public Player getJugadorGanador() {
 		return jugadorGanador;
 	}
 

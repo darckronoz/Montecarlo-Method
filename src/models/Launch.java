@@ -1,12 +1,12 @@
 package models;
-public class Lanzamiento {
+public class Launch {
 
 	private double puntaje;
-	private Tablero tablero ;
+	private Board tablero ;
 
 
-	public Lanzamiento() {
-		tablero = new Tablero();
+	public Launch() {
+		tablero = new Board();
 	}
 
 	 /**
